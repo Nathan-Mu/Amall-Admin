@@ -1,12 +1,25 @@
 import React, { Component } from 'react';
-import './index.css';
-import logo from './imgs/logo.png';
-import { Form, Input, Button } from 'antd';
 import { UserOutlined, LockOutlined } from '@ant-design/icons';
+import { connect } from 'react-redux';
+import { Form, Input, Button, message } from 'antd';
+import { loginRequest } from '../../api';
+import { saveUserInfo } from '../../redux/actions/login';
+import logo from './imgs/logo.png';
+import './index.css';
+import { Redirect } from 'react-router';
 
-export default class Login extends Component {
-	onFinish = values => {
-		console.log('Received values of form: ', values);
+class LoginUI extends Component {
+	onFinish = async values => {
+		const { username, password } = values;
+		const result = await loginRequest(username, password);
+		const { data } = result;
+		console.log(data.status);
+		if (data.status === 0) {
+			this.props.saveUserInfo(data.data);
+			this.props.history.replace('/admin');
+		} else {
+			message.warning('Username and password do not match', 1);
+		}
 	};
 
 	onFinishFailed = errorInfo => {
@@ -30,11 +43,14 @@ export default class Login extends Component {
 	};
 
 	render() {
+		if (this.props.isLogin) {
+			return <Redirect to='/admin' />;
+		}
 		return (
 			<div className='login'>
 				<header>
 					<img src={logo} alt='logo' />
-					<div className='title'>B2C Admin</div>
+					<div className='title'>AMall Admin</div>
 				</header>
 				<section>
 					<h1 className='title'>Welcome</h1>
@@ -99,3 +115,7 @@ export default class Login extends Component {
 		);
 	}
 }
+
+export default connect(state => ({ isLogin: state.userInfo.isLogin }), {
+	saveUserInfo,
+})(LoginUI);
