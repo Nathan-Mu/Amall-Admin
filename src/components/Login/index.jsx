@@ -8,7 +8,10 @@ import logo from './imgs/logo.png';
 import './index.css';
 import { Redirect } from 'react-router';
 
-class LoginUI extends Component {
+@connect(state => ({ isLogin: state.userInfo.isLogin }), {
+	saveUserInfo,
+})
+class Login extends Component {
 	onFinish = async values => {
 		const { username, password } = values;
 		const result = await loginRequest(username, password);
@@ -116,6 +119,4 @@ class LoginUI extends Component {
 	}
 }
 
-export default connect(state => ({ isLogin: state.userInfo.isLogin }), {
-	saveUserInfo,
-})(LoginUI);
+export default Login;

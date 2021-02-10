@@ -1,0 +1,39 @@
+.header {
+  background-color: white;
+}
+
+.header-top {
+  height: 40px;
+  border-bottom: 1px solid #1890ff;
+  text-align: right;
+  line-height: 40px;
+}
+
+.header-username {
+  margin-left: 12px;
+}
+
+.header-btm {
+  display: flex;
+  height: 40px;
+}
+
+.header-btm-breadcrumbs {
+  width: 25%;
+  margin-left: 16px;
+  /* text-align: center; */
+}
+
+.header-btm-info {
+  width: 75%;
+  text-align: right;
+  margin-right: 16px;
+  line-height: 40px;
+}
+
+.header-btm-info img {
+  width: 20px;
+  height: 16px;
+  margin: 0 4px;
+}
+
