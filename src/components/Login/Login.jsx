@@ -2,10 +2,10 @@ import React, { Component } from 'react';
 import { UserOutlined, LockOutlined } from '@ant-design/icons';
 import { connect } from 'react-redux';
 import { Form, Input, Button, message } from 'antd';
-import { loginRequest } from '../../api';
-import { saveUserInfo } from '../../redux/actions/login';
-import logo from './imgs/logo.png';
-import './index.css';
+import { loginRequest } from 'Api/backend-api';
+import { saveUserInfo } from 'Redux/actions/login';
+import logo from 'Img/logo.png';
+import './Login.scss';
 import { Redirect } from 'react-router';
 
 @connect(state => ({ isLogin: state.userInfo.isLogin }), {
@@ -16,7 +16,6 @@ class Login extends Component {
 		const { username, password } = values;
 		const result = await loginRequest(username, password);
 		const { data } = result;
-		console.log(data.status);
 		if (data.status === 0) {
 			this.props.saveUserInfo(data.data);
 			this.props.history.replace('/admin');

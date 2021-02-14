@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Redirect, Route, Switch } from 'react-router-dom';
-import Login from './components/Login';
-import Admin from './components/Admin';
+import Login from 'Components/Login/Login';
+import Admin from 'Components/Admin/Admin';
 
 class App extends Component {
 	render() {

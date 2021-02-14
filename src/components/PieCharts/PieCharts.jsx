@@ -1,10 +1,10 @@
 import React, { Component } from 'react'
 
-export default class BarChart extends Component {
+export default class PieCharts extends Component {
   render() {
     return (
       <div>
-        BarChart
+        PieChart
       </div>
     )
   }

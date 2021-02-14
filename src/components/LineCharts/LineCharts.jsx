@@ -1,10 +1,10 @@
 import React, { Component } from 'react'
 
-export default class Home extends Component {
+export default class LineCharts extends Component {
   render() {
     return (
       <div>
-        
+        LineChart
       </div>
     )
   }

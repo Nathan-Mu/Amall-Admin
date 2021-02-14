@@ -1,13 +1,12 @@
 import { SAVE_USER_INFO, DELETE_USER_INFO } from '../action_types';
 
-let user = JSON.parse(localStorage.getItem('user'));
+let user = localStorage.getItem('user')
+	? JSON.parse(localStorage.getItem('user'))
+	: {};
 let token = localStorage.getItem('token');
+let isLogin = user && token;
 
-const initState = {
-	user: user || {},
-	token: token || '',
-	isLogin: user && token,
-};
+const initState = { user, token, isLogin };
 
 // eslint-disable-next-line import/no-anonymous-default-export
 export default (prevState = initState, action) => {

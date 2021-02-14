@@ -1,9 +1,9 @@
 import { message } from 'antd';
 import axios from 'axios';
 import qs from 'querystring';
-import { BASE_URL } from '../config';
-import store from '../redux/store';
-import { deleteUserInfo } from '../redux/actions/login';
+import { BASE_URL } from '../Config';
+import store from '../Redux/store';
+import { deleteUserInfo } from '../Redux/actions/login';
 
 const instance = axios.create({
 	baseURL: BASE_URL,
