@@ -1,3 +1,22 @@
 .admin {
-  height: 100%;
+	.right {
+		min-height: 100vh;
+		margin-left: 200px;
+		.content {
+			margin: 24px 16px 0;
+			overflow: initial;
+		}
+		.header {
+			padding: 0;
+		}
+		.footer {
+			text-align: center;
+		}
+	}
+	.sider {
+		overflow: auto;
+		height: 100vh;
+		position: fixed;
+		left: 0;
+	}
 }

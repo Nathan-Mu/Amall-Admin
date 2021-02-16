@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { UserOutlined, LockOutlined } from '@ant-design/icons';
 import { connect } from 'react-redux';
 import { Form, Input, Button, message } from 'antd';
-import { loginRequest } from 'Api/backend-api';
+import { requestLogin } from 'Api/backend-api';
 import { saveUserInfo } from 'Redux/actions/login';
 import logo from 'Img/logo.png';
 import './Login.scss';
@@ -14,7 +14,7 @@ import { Redirect } from 'react-router';
 class Login extends Component {
 	onFinish = async values => {
 		const { username, password } = values;
-		const result = await loginRequest(username, password);
+		const result = await requestLogin(username, password);
 		const { data } = result;
 		if (data.status === 0) {
 			this.props.saveUserInfo(data.data);

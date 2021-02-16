@@ -3,7 +3,6 @@ import { Menu } from 'antd';
 import { Link } from 'react-router-dom';
 import { withRouter } from 'react-router-dom';
 import MENU from 'Config/menu-config';
-import logo from 'Img/logo.png';
 import './Nav.scss';
 
 @withRouter
@@ -18,20 +17,15 @@ class Nav extends Component {
 		});
 	};
 
-	getSelectedKeys = (entranceKey) => {
-		let paths = this.props.history.location.pathname.split('/');
-		let selectedKey = paths[paths.length-1];
-		return selectedKey!== 'admin' ? selectedKey : entranceKey;
+	getDefaultSelectedKeys = () => {
+		return this.props.history.location.pathname.split('/').splice(2);
 	};
 
-	getDefaultSelectedKeys = () => {
-		return this.props.history.location.pathname.split('/').splice(2)
-	}
-
 	generateMenu = config => {
+		const {matchedKey} = this.props;
 		return (
 			<Menu
-				defaultSelectedKeys={this.getSelectedKeys(MENU.entranceKey)}
+				selectedKeys={matchedKey}
 				defaultOpenKeys={this.getDefaultSelectedKeys()}
 				mode='inline'
 				theme='dark'
@@ -51,24 +45,18 @@ class Nav extends Component {
 				);
 			} else {
 				return (
-					<Menu.Item key={item.key} icon={item.icon}>
-						<Link to={item.path}>{item.title}</Link>
-					</Menu.Item>
+					!item.hiddenOnMenu && (
+						<Menu.Item key={item.key} icon={item.icon}>
+							<Link to={item.path}>{item.title}</Link>
+						</Menu.Item>
+					)
 				);
 			}
 		});
 	};
 
 	render() {
-		return (
-			<div>
-				<header className='nav-header'>
-					<img src={logo} alt='logo' />
-					<h1>Amall Admin</h1>
-				</header>
-				{this.generateMenu(MENU)}
-			</div>
-		);
+		return <>{this.generateMenu(MENU)}</>;
 	}
 }
 

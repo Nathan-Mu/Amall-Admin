@@ -4,7 +4,7 @@ let user = localStorage.getItem('user')
 	? JSON.parse(localStorage.getItem('user'))
 	: {};
 let token = localStorage.getItem('token');
-let isLogin = user && token;
+let isLogin = user && token ? true : false;
 
 const initState = { user, token, isLogin };
 

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Modal, Button, Breadcrumb, Menu } from 'antd';
+import { Modal, Button, Breadcrumb } from 'antd';
 import { ExclamationCircleOutlined } from '@ant-design/icons';
 import { FullscreenOutlined, FullscreenExitOutlined } from '@ant-design/icons';
 import { connect } from 'react-redux';
@@ -27,39 +27,20 @@ class Header extends Component {
 			let isFullScreen = !this.state.isFullScreen;
 			this.setState({ isFullScreen });
 		});
-		let weather = await this.getWeather();
-		this.setState({ weather });
+		let weatherResult = await weatherRequest();
+		if (weatherResult) {
+			let { main, icon } = weatherResult.data.weather[0];
+			let weather = { main, icon };
+			this.setState({ weather });
+		}
 	}
 
 	fullscreen = () => {
 		screenfull.toggle();
 	};
 
-	getBreadcrumbItems = items => {
-		let { pathname } = this.props.history.location;
-		let paths = pathname.split('/').splice(2);
-		let result = [];
-		let menuItems = items;
-		for (let path of paths) {
-			for (let menuItem of menuItems) {
-				if (path === menuItem.key) {
-					result.push(menuItem);
-					menuItems = menuItem.subItems;
-					break;
-				}
-			}
-			if (!menuItems) {
-				break;
-			}
-		}
-		return result;
-	};
 
-	getWeather = async () => {
-		let weatherResult = await weatherRequest();
-		let { main, icon } = weatherResult.data.weather[0];
-		return { main, icon };
-	};
+	getWeather = async () => {};
 
 	logout = () => {
 		Modal.confirm({
@@ -76,7 +57,7 @@ class Header extends Component {
 
 	render() {
 		const { isFullScreen, weather } = this.state;
-		const { userInfo } = this.props;
+		const { userInfo, breadcrumbItems } = this.props;
 		return (
 			<header className='header'>
 				<div className='header-top'>
@@ -92,14 +73,14 @@ class Header extends Component {
 				</div>
 				<div className='header-btm'>
 					<Breadcrumb separator='>' className='header-btm-breadcrumbs'>
-						<Breadcrumb.Item>
-							<Link to={MENU.entrance.path}>Amall Admin</Link>
+						<Breadcrumb.Item key='root'>
+							<Link to={MENU.root.path}>Amall Admin</Link>
 						</Breadcrumb.Item>
-						{this.getBreadcrumbItems(MENU.items).map(item => {
+						{breadcrumbItems.map(item => {
 							return (
-								<Breadcrumb.Item>
-									{item.path ? (
-										<Link to={item.path}>{item.title}</Link>
+								<Breadcrumb.Item key={item.key}>
+									{item.path || item.defaultPath ? (
+										<Link to={item.path || item.defaultPath}>{item.title}</Link>
 									) : (
 										<>{item.title}</>
 									)}
@@ -108,15 +89,17 @@ class Header extends Component {
 						})}
 					</Breadcrumb>
 					<div className='header-btm-info'>
-						<Clock /> |
-						<img
-							src={
-								weather.icon &&
-								`http://openweathermap.org/img/wn/${weather.icon}.png`
-							}
-							alt='Weather'
-						/>
-						{weather.main}
+						<Clock />
+						{weather.main && (
+							<>
+								<span>|</span>
+								<img
+									src={`http://openweathermap.org/img/wn/${weather.icon}.png`}
+									alt='Weather'
+								/>
+								<span>{weather.main}</span>
+							</>
+						)}
 					</div>
 				</div>
 			</header>

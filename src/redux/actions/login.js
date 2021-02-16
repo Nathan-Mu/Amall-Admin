@@ -2,7 +2,7 @@ import { DELETE_USER_INFO, SAVE_USER_INFO } from '../action_types';
 
 export const saveUserInfo = data => {
 	localStorage.setItem('user', JSON.stringify(data.user));
-	localStorage.setItem('token', JSON.stringify(data.token));
+	localStorage.setItem('token', data.token);
 	return { type: SAVE_USER_INFO, data };
 };
 
