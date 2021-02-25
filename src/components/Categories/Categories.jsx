@@ -26,8 +26,13 @@ export default class Categories extends Component {
 		let { status, data } = result.data;
 		if (status !== 0) {
 			message.error('Network request failed');
+			// IMPROVE: show 404 page instead of no data
+			this.setState({ isLoading: false });
+		} else {
+			const categories = data.reverse();
+			// this.props.stageCategories(categories);
+			this.setState({ categories, isLoading: false });
 		}
-		this.setState({ categories: data.reverse(), isLoading: false });
 	};
 
 	showCreateModal = () => {
@@ -59,6 +64,7 @@ export default class Categories extends Component {
 		const { status, data } = result.data;
 		if (status === 0) {
 			let categories = [data, ...this.state.categories];
+			this.props.stageCategories(categories);
 			this.setState({ isModalVisible: false, categories });
 		} else {
 			return new Promise((resolve, reject) => {
@@ -71,9 +77,9 @@ export default class Categories extends Component {
 		let result = await requestUpdateCategoryName(categoryName, categoryId);
 		const { status } = result.data;
 		if (status === 0) {
+			// TODO: should check if the name exists or not (backend)
 			this.initData();
 		} else {
-			// TODO: should check if the name exists or not (backend)
 			return new Promise((resolve, reject) => {
 				reject({ msg: 'Update failed' });
 			});

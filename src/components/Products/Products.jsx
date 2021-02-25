@@ -24,18 +24,29 @@ import './Products.scss';
 import { DEFAULT_PAGE_SIZE } from 'Config';
 const { Option } = Select;
 
-export default class Products extends Component {
-	state = {
-		products: [],
-		total: 0,
-		pageSize: DEFAULT_PAGE_SIZE,
-		current: 1,
-		keyword: '',
-		searchBy: '',
-		isLoading: true
-	};
+class Products extends Component {
+	constructor(props) {
+		super(props);
+		const historyState = this.props.history.location.state || {};
+		const {
+			pageSize = DEFAULT_PAGE_SIZE,
+			current = 1,
+			keyword,
+			searchBy,
+		} = historyState;
+		this.state = {
+			products: [],
+			total: 0,
+			isLoading: true,
+			pageSize,
+			current,
+			keyword,
+			searchBy,
+		};
+	}
 
 	async componentDidMount() {
+		this.props.history.replace(this.props.location.pathname, {});
 		this.retrievePagedProducts({});
 	}
 
@@ -55,14 +66,21 @@ export default class Products extends Component {
 		}
 	};
 
+	savePageBeforeLeave = () => {
+		const { history } = this.props;
+		const { location } = history;
+		const { keyword, pageNo, pageSize, searchBy } = this.state;
+		history.replace(location.pathname, { keyword, pageNo, pageSize, searchBy });
+	};
+
 	handleFormSubmit = ({ keyword, searchBy }) => {
-		this.setState({isLoading: true})
+		this.setState({ isLoading: true });
 		this.retrievePagedProducts({ keyword, searchBy });
 	};
 
 	handlePageChange = pagination => {
 		const { current, pageSize } = pagination;
-		this.setState({isLoading: true})
+		this.setState({ isLoading: true });
 		pageSize !== this.state.pageSize
 			? this.retrievePagedProducts({ pageSize })
 			: this.retrievePagedProducts({ current, pageSize });
@@ -86,15 +104,17 @@ export default class Products extends Component {
 				pageSize,
 				searchBy,
 				keyword,
-				isLoading: false
+				isLoading: false,
 			});
 		} else {
 			message.error('Retrieve products failed');
+			// IMPROVE: show 404 page instead of no data
+			this.setState({ isLoading: false });
 		}
 	};
 
 	render() {
-		const { total, current, pageSize, isLoading } = this.state;
+		const { total, current, pageSize, isLoading, keyword } = this.state;
 		const dataSource = this.state.products;
 		const columns = [
 			{
@@ -134,10 +154,31 @@ export default class Products extends Component {
 				title: 'Actions',
 				align: 'center',
 				width: '18%',
-				render: () => (
+				render: item => (
 					<>
-						<Button className='actions-button'>Details</Button>&nbsp;&nbsp;
-						<Button className='actions-button'>Edit</Button>
+						<Button
+							className='actions-button'
+							onClick={() => {
+								this.savePageBeforeLeave();
+								this.props.history.push(`/admin/products/details/${item._id}`, {
+									product: item,
+								});
+							}}
+						>
+							Details
+						</Button>
+						&nbsp;&nbsp;
+						<Button
+							className='actions-button'
+							onClick={() => {
+								this.savePageBeforeLeave();
+								this.props.history.push(`/admin/products/edit/${item._id}`, {
+									product: item,
+								});
+							}}
+						>
+							Edit
+						</Button>
 					</>
 				),
 			},
@@ -158,7 +199,7 @@ export default class Products extends Component {
 									<Option value='productDesc'>search by description</Option>
 								</Select>
 							</Form.Item>
-							<Form.Item name='keyword'>
+							<Form.Item name='keyword' initialValue={keyword}>
 								<Input placeholder='keyword' allowClear />
 							</Form.Item>
 							<Form.Item>
@@ -203,3 +244,5 @@ export default class Products extends Component {
 		);
 	}
 }
+
+export default Products;

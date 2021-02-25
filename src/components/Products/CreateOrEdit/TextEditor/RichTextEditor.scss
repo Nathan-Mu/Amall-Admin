@@ -1,0 +1,26 @@
+.editor {
+	.top-toolbar {
+		border: rgb(217, 217, 217) solid 1px;
+		border-radius: 2px;
+		.rdw-option-wrapper {
+			height: 28px;
+		}
+		.rdw-dropdown-selectedtext {
+			span {
+				color: black;
+			}
+		}
+    .rdw-fontsize-dropdown {
+      .rdw-dropdown-selectedtext {
+        width: 48px;
+      }
+    }
+	}
+	.btm-editor {
+		border: rgb(217, 217, 217) solid 1px;
+		border-radius: 2px;
+		min-height: 200px;
+		padding: 10px 20px;
+		line-height: 1em;
+	}
+}
