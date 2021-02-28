@@ -28,6 +28,7 @@ const MENU = {
 			pathIdentifer: 'home',
 			icon: <HomeOutlined />,
 			path: '/admin/home',
+			disableCheckbox: true
 		},
 		{
 			title: 'Products',
@@ -35,7 +36,7 @@ const MENU = {
 			pathIdentifer: 'products',
 			icon: <DatabaseOutlined />,
 			path: '/admin/products/all-products',
-			subItems: [
+			children: [
 				{
 					title: 'Create',
 					key: 'product-create',
@@ -93,7 +94,7 @@ const MENU = {
 			key: 'stats',
 			pathIdentifer: 'stats',
 			icon: <AreaChartOutlined />,
-			subItems: [
+			children: [
 				{
 					title: 'Line Charts',
 					key: 'line-charts',
@@ -129,7 +130,7 @@ const MENU = {
 				if (pathIdentifer === item.pathIdentifer) {
 					breadcrumbItems = [...breadcrumbItems, item];
 					matchedKey = item.key;
-					items = item.subItems;
+					items = item.children;
 					break;
 				}
 			}

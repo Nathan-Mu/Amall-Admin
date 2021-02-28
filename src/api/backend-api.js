@@ -104,3 +104,23 @@ export const requestUpdateProduct = product =>
 		url: '/manage/product/update',
 		data: product,
 	});
+
+export const requestRoles = () =>
+	axios({
+		method: GET,
+		url: '/manage/role/list',
+	});
+
+export const requestCreateRole = roleName =>
+	axios({
+		method: POST,
+		url: '/manage/role/add',
+		data: { roleName },
+	});
+
+export const requestSetPermissions = (id, permissions, auth_name) =>
+	axios({
+		method: POST,
+		url: '/manage/role/update',
+		data: { _id: id, menus: permissions, auth_time: Date.now(), auth_name },
+	});

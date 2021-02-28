@@ -8,7 +8,7 @@ import { withRouter, Link } from 'react-router-dom';
 import dayjs from 'dayjs';
 import { deleteUserInfo } from 'Redux/actions/login';
 import { weatherRequest } from 'Api/weather-api';
-import MENU from 'Config/menu-config';
+import MENU from 'Config/menu';
 import './Header.scss';
 
 @connect(state => ({ userInfo: state.userInfo }), { deleteUserInfo })
@@ -92,7 +92,7 @@ class Header extends Component {
 						<Clock />
 						{weather.main && (
 							<>
-								<span>|</span>
+								<span> |</span>
 								<img
 									src={`http://openweathermap.org/img/wn/${weather.icon}.png`}
 									alt='Weather'

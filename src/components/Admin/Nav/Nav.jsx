@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Menu } from 'antd';
 import { Link } from 'react-router-dom';
 import { withRouter } from 'react-router-dom';
-import MENU from 'Config/menu-config';
+import MENU from 'Config/menu';
 import './Nav.scss';
 
 @withRouter
@@ -37,10 +37,10 @@ class Nav extends Component {
 
 	generateMenuItems = items => {
 		return items.map(item => {
-			if (item.subItems) {
+			if (item.children) {
 				return (
 					<Menu.SubMenu key={item.key} icon={item.icon} title={item.title}>
-						{this.generateMenuItems(item.subItems)}
+						{this.generateMenuItems(item.children)}
 					</Menu.SubMenu>
 				);
 			} else {
