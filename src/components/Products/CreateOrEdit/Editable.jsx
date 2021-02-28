@@ -5,7 +5,6 @@ import {
 	Input,
 	Button,
 	Select,
-	Switch,
 	message,
 	Spin,
 	InputNumber,
@@ -137,10 +136,6 @@ export default class Editable extends Component {
 	};
 
 	uploaderRef = React.createRef();
-
-	onFinishFailed = errorInfo => {
-		console.log('Failed:', errorInfo);
-	};
 
 	layout = {
 		regularLayout: {
