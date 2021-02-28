@@ -33,10 +33,10 @@ class Login extends Component {
 			return Promise.reject('Please enter your Username');
 		}
 		if (value.length < 4) {
-			return Promise.reject('Password cannot be shorter than 4 digits');
+			return Promise.reject('Password cannot be shorter than 4 characters');
 		}
 		if (value.length > 12) {
-			return Promise.reject('Password cannot be longer than 12 digits');
+			return Promise.reject('Password cannot be longer than 12 characters');
 		}
 		if (!/^\w+$/.test(value)) {
 			return Promise.reject('Password can only be letters, numbers and _');
@@ -68,9 +68,9 @@ class Login extends Component {
 								{ required: true, message: 'Please enter your Username' },
 								{
 									max: 12,
-									message: 'Username cannot be longer than 12 digits',
+									message: 'Username cannot be longer than 12 characters',
 								},
-								{ min: 4, message: 'Username cannot be shorter than 4 digits' },
+								{ min: 4, message: 'Username cannot be shorter than 4 characters' },
 								{
 									pattern: /^\w+$/,
 									message: `Username can only be letters, numbers and _`,
