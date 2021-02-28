@@ -33,6 +33,7 @@ const CreateRole = () => {
 	};
 
 	const handleCancel = () => {
+		form.resetFields();
 		setVisible(false);
 	};
 
@@ -67,7 +68,7 @@ const CreateRole = () => {
 					rules={[
 						{
 							required: true,
-							message: 'Please input the name of the role',
+							message: 'Please enter the name of the role',
 						},
 					]}
 				>

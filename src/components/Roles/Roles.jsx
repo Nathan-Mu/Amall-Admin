@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Card, Button, Table, message } from 'antd';
 import { PlusCircleOutlined } from '@ant-design/icons';
-import { requestRoles, requestCreateRole } from 'Api/backend-api';
+import { requestRoles } from 'Api/backend-api';
 import dayjs from 'dayjs';
 import PubSub from 'pubsub-js';
 import CreateRoleModal from './Modals/CreateRole';
