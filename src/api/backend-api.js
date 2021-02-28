@@ -124,3 +124,35 @@ export const requestSetPermissions = (id, permissions, auth_name) =>
 		url: '/manage/role/update',
 		data: { _id: id, menus: permissions, auth_time: Date.now(), auth_name },
 	});
+
+export const requestUsers = () =>
+	axios({
+		method: GET,
+		url: '/manage/user/list',
+	});
+
+export const requestCreateUser = (username, password, phone, email, role_id) =>
+	axios({
+		method: POST,
+		url: '/manage/user/add',
+		data: {
+			username,
+			password,
+			phone,
+			email,
+			role_id,
+		},
+	});
+
+export const requestUpdateUser = (_id, username, phone, email, role_id) =>
+	axios({
+		method: POST,
+		url: '/manage/user/update',
+		data: {
+			_id,
+			username,
+			phone,
+			email,
+			role_id,
+		},
+	});

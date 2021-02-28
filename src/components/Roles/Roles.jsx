@@ -17,6 +17,7 @@ import {
 export default class Roles extends Component {
 	state = {
 		roles: [],
+		isLoading: true
 	};
 
 	componentDidMount() {
@@ -56,9 +57,10 @@ export default class Roles extends Component {
 		let { status, data } = result.data;
 		if (status === 0) {
 			const roles = data.map(item => this.renameRetrievedRole(item)).reverse();
-			this.setState({ roles });
+			this.setState({ roles, isLoading: false });
 		} else {
-			message.error('Request Roles Failed');
+			message.error('Request Roles Failed', 1);
+			this.setState({ isLoading: false });
 		}
 	};
 
@@ -127,6 +129,7 @@ export default class Roles extends Component {
 			},
 		];
 		const dataSource = this.state.roles;
+		const {isLoading} = this.state;
 		return (
 			<Card extra={createButton}>
 				<Table
@@ -135,6 +138,7 @@ export default class Roles extends Component {
 					bordered
 					size='middle'
 					rowKey='id'
+					loading={isLoading}
 				/>
 				<CreateRoleModal />
 				<SetPermissionsModal />

@@ -4,7 +4,7 @@ import { Redirect, Route, Switch } from 'react-router';
 import { Layout } from 'antd';
 import { deleteUserInfo } from 'Redux/actions/login';
 import Header from './Header/Header';
-import routes from 'Config/route'
+import routes from 'Config/route';
 import './Admin.scss';
 import Nav from './Nav/Nav';
 import Logo from './Logo/Logo';
@@ -22,9 +22,12 @@ class Admin extends Component {
 		const { breadcrumbItems, matchedKey } = MENU.traverseItems(
 			this.props.history.location.pathname
 		);
-		const { isLogin } = this.props.userInfo;
+		const { isLogin, user } = this.props.userInfo;
+		let permissions = [];
 		if (!isLogin) {
 			return <Redirect to='/login' />;
+		} else {
+			permissions = user.role.menus
 		}
 		const { Footer, Sider, Content } = Layout;
 		return (
@@ -37,8 +40,21 @@ class Admin extends Component {
 					<Header className='header' breadcrumbItems={breadcrumbItems} />
 					<Content className='content'>
 						<Switch>
-							{routes.map((route, index) =>
-								route.path ? <Route {...route} key={index}/> : <Redirect {...route} key={index}/>
+							{routes.map(
+								(route, index) => {
+									const isSuper = user.username === 'admin';
+									const isAccessible =
+										isSuper ||
+										!route.key || 
+										route.key === 'home' ||
+										permissions.some(permission => route.key === permission);
+									if (route.path) {
+										return isAccessible && <Route {...route} key={index} />;
+									} else {
+										return <Redirect {...route} key={index} />;
+									}
+								}
+								// route.path ? <Route {...route} key={index}/> : <Redirect {...route} key={index}/>
 							)}
 							{/* <Route path='/admin/home' component={Home} />
 							<Route path='/admin/products'>

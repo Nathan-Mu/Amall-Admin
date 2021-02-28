@@ -4,8 +4,13 @@ import { Link } from 'react-router-dom';
 import { withRouter } from 'react-router-dom';
 import MENU from 'Config/menu';
 import './Nav.scss';
+import { connect } from 'react-redux';
 
 @withRouter
+@connect(state => ({
+	permissions: state.userInfo.user.role.menus,
+	username: state.userInfo.user.username,
+}))
 class Nav extends Component {
 	state = {
 		collapsed: false,
@@ -22,7 +27,7 @@ class Nav extends Component {
 	};
 
 	generateMenu = config => {
-		const {matchedKey} = this.props;
+		const { matchedKey } = this.props;
 		return (
 			<Menu
 				selectedKeys={matchedKey}
@@ -36,14 +41,22 @@ class Nav extends Component {
 	};
 
 	generateMenuItems = items => {
+		const { username, permissions } = this.props;
+		const isSuper = username === 'admin';
+		// eslint-disable-next-line array-callback-return
 		return items.map(item => {
+			const hasPermission =
+				isSuper || item.key === 'home' || permissions.some(p => p === item.key);
 			if (item.children) {
+				const subMenu = this.generateMenuItems(item.children);
 				return (
-					<Menu.SubMenu key={item.key} icon={item.icon} title={item.title}>
-						{this.generateMenuItems(item.children)}
-					</Menu.SubMenu>
+					subMenu.some(item => item) && (
+						<Menu.SubMenu key={item.key} icon={item.icon} title={item.title}>
+							{subMenu}
+						</Menu.SubMenu>
+					)
 				);
-			} else {
+			} else if (hasPermission) {
 				return (
 					!item.hiddenOnMenu && (
 						<Menu.Item key={item.key} icon={item.icon}>

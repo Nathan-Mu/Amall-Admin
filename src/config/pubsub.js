@@ -3,3 +3,7 @@ export const SET_PERMISSIONS_SUCCESS = 'roles.set_permissions_success';
 export const OPEN_CREATE_ROLE_MODAL = 'roles.open_create_role_modal';
 export const CREATE_ROLE_SUCCESS = 'roles.create_role_success';
 export const ROLES = 'roles';
+export const CREATE_USER_SUCCESS = 'users.create_user_success';
+export const UPDATE_USER_SUCCESS = 'users.update_user_success';
+export const OPEN_USER_MODAL = 'users.open_user_modal';
+export const USERS = 'users';
