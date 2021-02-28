@@ -62,7 +62,7 @@ const SetPermissions = () => {
 		<Modal
 			visible={visible}
 			title={`Set Permissions for ${name}`}
-			okText='Create'
+			okText='Confirm'
 			cancelText='Cancel'
 			onCancel={handleCancel}
 			onOk={handleOk}

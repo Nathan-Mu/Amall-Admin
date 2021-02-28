@@ -1,9 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import { Modal, Form, Input } from 'antd';
-import { message } from 'antd';
+import { Modal, Form, Input, message } from 'antd';
 import PubSub from 'pubsub-js';
 import { CREATE_ROLE_SUCCESS, OPEN_CREATE_ROLE_MODAL } from 'Config/pubsub';
-import { requestCreateRole, requestSetPermissions } from 'Api/backend-api';
+import { requestCreateRole } from 'Api/backend-api';
 
 const CreateRole = () => {
 	const [form] = Form.useForm();
@@ -25,7 +24,7 @@ const CreateRole = () => {
 		const { status, data } = result.data;
 		if (status === 0) {
 			setVisible(false);
-			message.success('Created role successfully')
+			message.success('Created role successfully');
 			PubSub.publish(CREATE_ROLE_SUCCESS, data);
 		} else {
 			message.error('Created role failed', 1);
@@ -41,15 +40,17 @@ const CreateRole = () => {
 		<Modal
 			visible={visible}
 			title='Create a new role'
-			okText='Create'
+			okText='Confirm'
 			cancelText='Cancel'
 			onCancel={handleCancel}
 			onOk={() => {
 				form
 					.validateFields()
 					.then(values => {
-						form.resetFields();
 						handleOk(values.name);
+					})
+					.then(() => {
+						form.resetFields();
 					})
 					.catch(() => {});
 			}}
