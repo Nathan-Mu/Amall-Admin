@@ -11,7 +11,7 @@ import {
 } from 'Config/pubsub';
 
 const SetPermissions = () => {
-	const [checkedKeys, setCheckedKeys] = useState(['home']);
+	const [checkedKeys, setCheckedKeys] = useState(['readme']);
 	const [visible, setVisible] = useState(false);
 	const [name, setName] = useState('');
 	const [id, setId] = useState(0);
@@ -30,7 +30,7 @@ const SetPermissions = () => {
 			setVisible(true);
 			setName(data.name);
 			setId(data.id);
-			setCheckedKeys(['home', ...data.permissions]);
+			setCheckedKeys(['readme', ...data.permissions]);
 		}
 	};
 
@@ -39,7 +39,7 @@ const SetPermissions = () => {
 	];
 
 	const onCheck = checkedKeys => {
-		setCheckedKeys(['home', ...checkedKeys]);
+		setCheckedKeys(['readme', ...checkedKeys]);
 	};
 
 	const handleCancel = () => {

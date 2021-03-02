@@ -22,6 +22,7 @@ export default function UserModal() {
 		return () => {
 			PubSub.unsubscribe(token);
 		};
+	// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, []);
 
 	const subscriber = (_, data) => {

@@ -64,7 +64,7 @@ export default class Categories extends Component {
 		const { status, data } = result.data;
 		if (status === 0) {
 			let categories = [data, ...this.state.categories];
-			this.props.stageCategories(categories);
+			// this.props.stageCategories(categories);
 			this.setState({ isModalVisible: false, categories });
 		} else {
 			return new Promise((resolve, reject) => {
@@ -182,7 +182,8 @@ const CategoryForm = ({
 			.catch(error => {
 				error.msg
 					? message.warn(error.msg, 1)
-					: message.warn('The form input is incorrect, please check', 1);
+					// : message.warn('The form input is incorrect, please check', 1);
+				:console.warn(error);
 			});
 	};
 	React.useEffect(() => {
