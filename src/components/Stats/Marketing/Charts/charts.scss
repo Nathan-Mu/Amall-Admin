@@ -1,0 +1,61 @@
+.conversation-rate {
+	.wrapper {
+		position: relative;
+		padding: 10px;
+	}
+	.wrapper .title {
+		font-size: 20px;
+	}
+	.wrapper .yaxis-wrapper {
+		width: 70px;
+		font-size: 14px;
+	}
+	.wrapper .yaxis {
+		position: relative;
+		display: -webkit-box;
+		width: 70px;
+		height: 43px;
+		overflow: hidden;
+		font-weight: 500;
+		line-height: 22px;
+		text-overflow: ellipsis;
+		-webkit-line-clamp: 2;
+		-webkit-box-orient: vertical;
+	}
+	.wrapper .icon-question {
+		position: absolute;
+		top: 4px;
+		right: -6px;
+		color: #999;
+	}
+	.wrapper .chart-wrapper {
+		height: 340px;
+		position: absolute !important;
+		top: 40px;
+		right: 10px;
+		left: 96px;
+	}
+	.wrapper .message-list {
+		position: absolute;
+		right: 10px;
+		left: 186px;
+		z-index: 1;
+	}
+	.wrapper .message-list .ant-alert-icon {
+		position: relative;
+		top: 0;
+		left: 0;
+		margin-right: 8px;
+	}
+	.wrapper .message-list .ant-alert-warning {
+		height: 28px;
+		padding: 0 8px;
+		line-height: 28px;
+		border: none;
+		border-radius: 0;
+	}
+
+  .hint {
+    width:200px
+  }
+}
