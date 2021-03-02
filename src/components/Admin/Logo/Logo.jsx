@@ -1,17 +1,20 @@
 import React, { Component } from 'react';
-import logo from 'Img/logo.png'
+import logo from 'Img/logo.png';
 import { withRouter } from 'react-router';
 
 @withRouter
 class Logo extends Component {
 	render() {
 		return (
-			<div onClick={() => this.props.history.push('/admin/home')} style={{cursor: 'pointer'}}>
-				<header className='nav-header'>
-					<img src={logo} alt='logo' />
-					<h1>Amall Admin</h1>
-				</header>
-			</div>
+			<header
+				className='nav-header'
+				onClick={() => this.props.history.push('/admin/home')}
+			>
+				<div style={{ cursor: 'pointer', margin: '0 auto', display: 'flex', alignItems: 'center'}}>
+					<img src={logo} alt='logo' style={{marginLeft: 0}}/>
+					{!this.props.collapsed && <h1>Amall Admin</h1>}
+				</div>
+			</header>
 		);
 	}
 }

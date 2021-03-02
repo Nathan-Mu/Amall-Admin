@@ -1,10 +1,28 @@
 .header {
 	background-color: white;
 	.header-top {
+		
 		height: 40px;
 		border-bottom: 1px solid #1890ff;
-		text-align: right;
+		display: flex;
 		line-height: 40px;
+		.trigger {
+			width: 20%;
+			padding: 0 24px;
+			font-size: 18px;
+			line-height: 40px;
+			cursor: pointer;
+			transition: color 0.3s;
+			text-align: left;
+		}
+
+		.trigger:hover {
+			color: #1890ff;
+		}
+		.top-right {
+			width: 80%;
+			text-align: right;
+		}
 	}
 	.header-username {
 		margin-left: 12px;

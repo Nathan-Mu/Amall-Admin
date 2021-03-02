@@ -1,20 +1,20 @@
-import Home from 'Components/Home/Home';
+import ReadMe from 'Components/ReadMe/ReadMe';
 import Editable from 'Components/Products/CreateOrEdit/Editable';
 import Details from 'Components/Products/Details/Details';
 import Products from 'Components/Products/Products';
 import Categories from 'Components/Categories/Categories';
 import Roles from 'Components/Roles/Roles';
-import BarCharts from 'Components/Stats/BarCharts';
-import LineCharts from 'Components/Stats/LineCharts';
-import PieCharts from 'Components/Stats/PieCharts';
+import Revenue from 'Components/Stats/Revenue/Revenue';
+import Marketing from 'Components/Stats/Marketing/Marketing';
+import Visits from 'Components/Stats/Visits/Visits';
 import Users from 'Components/Users/Users';
 
 // eslint-disable-next-line import/no-anonymous-default-export
 export default [
 	{
-		path: '/admin/home',
-		component: Home,
-		key: 'home',
+		path: '/admin/readme',
+		component: ReadMe,
+		key: 'readme',
 	},
 	{
 		path: '/admin/products/all-products',
@@ -57,21 +57,21 @@ export default [
 		key: 'roles',
 	},
 	{
-		path: '/admin/stats/bar-charts',
-		component: BarCharts,
-		key: 'bar-charts',
+		path: '/admin/stats/revenue',
+		component: Revenue,
+		key: 'revenue',
 	},
 	{
-		path: '/admin/stats/line-charts',
-		component: LineCharts,
-		key: 'line-charts',
+		path: '/admin/stats/marketing',
+		component: Marketing,
+		key: 'marketing',
 	},
 	{
-		path: '/admin/stats/pie-charts',
-		component: PieCharts,
-		key: 'pie-charts',
+		path: '/admin/stats/visits',
+		component: Visits,
+		key: 'visits',
 	},
 	{
-		to: '/admin/home',
+		to: '/admin/readme',
 	},
 ];

@@ -6,6 +6,7 @@ import { connect } from 'react-redux';
 import screenfull from 'screenfull';
 import { withRouter, Link } from 'react-router-dom';
 import dayjs from 'dayjs';
+import { MenuUnfoldOutlined, MenuFoldOutlined } from '@ant-design/icons';
 import { deleteUserInfo } from 'Redux/actions/login';
 import { weatherRequest } from 'Api/weather-api';
 import MENU from 'Config/menu';
@@ -39,7 +40,6 @@ class Header extends Component {
 		screenfull.toggle();
 	};
 
-
 	getWeather = async () => {};
 
 	logout = () => {
@@ -61,15 +61,28 @@ class Header extends Component {
 		return (
 			<header className='header'>
 				<div className='header-top'>
-					<Button size='small' onClick={this.fullscreen}>
-						{isFullScreen ? <FullscreenExitOutlined /> : <FullscreenOutlined />}
-					</Button>
-					<span className='header-username'>
-						Welcome, {userInfo.user.username}
-					</span>
-					<Button type='link' onClick={this.logout}>
-						Logout
-					</Button>
+				{React.createElement(
+						this.props.collapsed ? MenuUnfoldOutlined : MenuFoldOutlined,
+						{
+							className: 'trigger',
+							onClick: this.props.handleCollapseClick,
+						}
+					)}
+					<div className='top-right'>
+						<Button size='small' onClick={this.fullscreen}>
+							{isFullScreen ? (
+								<FullscreenExitOutlined />
+							) : (
+								<FullscreenOutlined />
+							)}
+						</Button>
+						<span className='header-username'>
+							Welcome, {userInfo.user.username}
+						</span>
+						<Button type='link' onClick={this.logout}>
+							Logout
+						</Button>
+					</div>
 				</div>
 				<div className='header-btm'>
 					<Breadcrumb separator='>' className='header-btm-breadcrumbs'>
