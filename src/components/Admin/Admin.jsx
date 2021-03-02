@@ -14,6 +14,15 @@ import MENU from 'Config/menu';
 	deleteUserInfo,
 })
 class Admin extends Component {
+	state = {
+		collapsed: false,
+	};
+
+	toggle = () => {
+		this.setState({
+			collapsed: !this.state.collapsed,
+		});
+	};
 	logout = () => {
 		this.props.deleteUserInfo();
 	};
@@ -27,25 +36,41 @@ class Admin extends Component {
 		if (!isLogin) {
 			return <Redirect to='/login' />;
 		} else {
-			permissions = user.role.menus
+			permissions = user.role.menus;
 		}
 		const { Footer, Sider, Content } = Layout;
+		const { collapsed } = this.state;
 		return (
 			<Layout className='admin'>
-				<Sider className='sider'>
-					<Logo />
+				<Sider
+					className='sider'
+					trigger={null}
+					collapsible
+					collapsed={collapsed}
+				>
+					<Logo collapsed={collapsed} />
 					<Nav matchedKey={matchedKey} />
 				</Sider>
-				<Layout className='right'>
-					<Header className='header' breadcrumbItems={breadcrumbItems} />
+				<Layout
+				className='right'
+				style={{marginLeft: collapsed ? 80 : 200, transitionDuration:'0.2s'}}
+				>
+					<Header
+						className='header'
+						breadcrumbItems={breadcrumbItems}
+						handleCollapseClick={this.toggle}
+					/>
 					<Content className='content'>
-						<Switch>
-							{routes.map(
-								(route, index) => {
+						<div
+							className='site-layout-background'
+							style={{ padding: 24, minHeight: 360 }}
+						>
+							<Switch>
+								{routes.map((route, index) => {
 									const isSuper = user.username === 'admin';
 									const isAccessible =
 										isSuper ||
-										!route.key || 
+										!route.key ||
 										route.key === 'home' ||
 										permissions.some(permission => route.key === permission);
 									if (route.path) {
@@ -53,33 +78,9 @@ class Admin extends Component {
 									} else {
 										return <Redirect {...route} key={index} />;
 									}
-								}
-								// route.path ? <Route {...route} key={index}/> : <Redirect {...route} key={index}/>
-							)}
-							{/* <Route path='/admin/home' component={Home} />
-							<Route path='/admin/products'>
-								<Switch>
-									<Route
-										path='/admin/products/all-products'
-										component={Products}
-									/>
-									<Route path='/admin/products/create' component={Editable} />
-									<Route path='/admin/products/edit/:id' component={Editable} />
-									<Route
-										path='/admin/products/details/:id'
-										component={Details}
-									/>
-									<Redirect to='/admin/products/all-products' />
-								</Switch>
-							</Route>
-							<Route path='/admin/categories' component={Categories} />
-							<Route path='/admin/users' component={Users} />
-							<Route path='/admin/roles' component={Roles} />
-							<Route path='/admin/stats/bar-charts' component={BarChart} />
-							<Route path='/admin/stats/line-charts' component={LineChart} />
-							<Route path='/admin/stats/pie-charts' component={PieChart} />
-							<Redirect to='/admin/home' /> */}
-						</Switch>
+								})}
+							</Switch>
+						</div>
 					</Content>
 					<Footer className='footer'>Amall ©2020 Created by Amall</Footer>
 				</Layout>
