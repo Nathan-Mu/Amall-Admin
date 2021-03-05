@@ -23,9 +23,9 @@ Back-end: TBD (private now, polishing the documentation and fixing bugs)
 
 Availble on http://amall-admin.xyz
 
-![image-20210305155015150](/Users/nathan/Desktop/AMall-Admin/README.assets/image-20210305155015150.png)
+![image-20210305155015150](README.assets/image-20210305155015150.png)
 
-![image-20210305155127963](/Users/nathan/Desktop/AMall-Admin/README.assets/image-20210305155127963.png)
+![image-20210305155127963](README.assets/image-20210305155127963.png)
 
 ![image-20210305155151932](/Users/nathan/Desktop/AMall-Admin/README.assets/image-20210305155151932.png)
 
