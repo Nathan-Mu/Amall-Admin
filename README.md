@@ -15,13 +15,13 @@ Amall Admin
 
 ## Project Structure
 
-Front-end: https://github.com/Nathan-Mu/Amall-Admin
+Front-end: https://github.com/Nathan-Mu/Amall-Admin 
 
 Back-end: TBD (private now, polishing the documentation and fixing bugs)
 
 ## Online Demo
 
-Availble on http://amall-admin.xyz
+Availble on http://amall-admin.xyz (username: `admin`, password: `admin`)
 
 ![image-20210305155015150](README.assets/image-20210305155015150.png)
 
