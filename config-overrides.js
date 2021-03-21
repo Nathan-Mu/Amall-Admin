@@ -5,17 +5,17 @@ const {
 	overrideDevServer,
 } = require('customize-cra');
 
-const devServerConfig = () => config => {
-	return {
-		...config,
-		// output: {
-		// 	publicPath: '/',
-		// },
-		devServer: {
-			historyApiFallback: true,
-		},
-	};
-};
+// const devServerConfig = () => config => {
+// 	return {
+// 		...config,
+// 		output: {
+// 			publicPath: '/',
+// 		},
+// 		devServer: {
+// 			historyApiFallback: true,
+// 		},
+// 	};
+// };
 
 module.exports = {
 	webpack: override(
@@ -26,5 +26,5 @@ module.exports = {
 		}),
 		addDecoratorsLegacy()
 	),
-	devServer: overrideDevServer(devServerConfig()),
+	// devServer: overrideDevServer(devServerConfig()),
 };
