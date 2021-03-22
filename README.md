@@ -68,7 +68,7 @@ src
     └── ... 
 ├── Img
 ├── Redux
-		├── actions
+	├── actions
     ├── reducers
     ├── action_types.js
     └── store.js 
