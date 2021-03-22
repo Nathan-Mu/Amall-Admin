@@ -83,7 +83,7 @@ src
 └── /admin * Admin.jsx
     ├── /readme * ReadMe.jsx
     ├── /products
-    		├── /all-products * Products.jsx
+    	├── /all-products * Products.jsx
         ├── /create * Editable.jsx
         ├── /edit:id * Editable.jsx
         └── /details:id * Details.jsx
