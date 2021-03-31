@@ -60,7 +60,7 @@ src
     ├── Categories
     ├── Login
     ├── Products
-		└── ...
+    └── ...
 ├── Config
     ├── index.js
     ├── menu.jsx
@@ -68,7 +68,7 @@ src
     └── ... 
 ├── Img
 ├── Redux
-	├── actions
+    ├── actions
     ├── reducers
     ├── action_types.js
     └── store.js 
