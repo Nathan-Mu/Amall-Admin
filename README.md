@@ -10,14 +10,14 @@ Amall Admin
 - aims to help clients manage their online store and staff easily
 - includes user management, categories management, products management, roles management and other functional modules
 - Front-end technology stack: React + React router + Redux, Antd, JavaScript(es6), Webpack, etc.
-- Backend technology stack: Node, Express, MongoDB, etc.
+- Backend technology stack: Node, Express, MongoDB, Mongoose, etc.
 - is running on AWS EC2 and accessible to the public
 
 ## Project Structure
 
 Front-end: https://github.com/Nathan-Mu/Amall-Admin 
 
-Back-end: TBD (private now, polishing the documentation and fixing bugs)
+Back-end: https://github.com/Nathan-Mu/Amall-Admin-Server
 
 ## Online Demo
 
