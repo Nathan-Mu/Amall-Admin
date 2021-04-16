@@ -31,7 +31,7 @@ Availble on http://amall-admin.xyz (username: `admin`, password: `admin`)
 
 ## Technologies / Libraries
 
-| Name                | Description                                       | Offical Website / GitHub Repo                  |
+| Name                | Description                                       | Official Website / GitHub Repo                  |
 | ------------------- | ------------------------------------------------- | ---------------------------------------------- |
 | React               | A JavaScript library for building user interfaces | https://reactjs.org/                           |
 | React-Router        | Declarative Routing for React.js                  | https://reactrouter.com/                       |
